@@ -4,7 +4,12 @@ spring:
     password: rhf1028623847
     url: jdbc:mysql://119.3.142.255:3306/gulimall_wms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.jdbc.Driver
-
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 119.3.142.255:8848
+  application:
+    name: gulimall-ware
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
@@ -13,6 +18,7 @@ mybatis-plus:
       id-type: auto
       logic-delete-value: 1
       logic-not-delete-value: 0
-
+server:
+  port: 11000
 
 
