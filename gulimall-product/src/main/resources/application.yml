@@ -6,7 +6,6 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   cloud:
     nacos:
-      discovery:
         server-addr: 119.3.142.255:8848
   application:
     name: gulimall-product
