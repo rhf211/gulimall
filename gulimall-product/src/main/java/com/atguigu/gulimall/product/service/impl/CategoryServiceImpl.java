@@ -51,7 +51,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     public CategoryEntity getChilrden(CategoryEntity entity, List<CategoryEntity> list) {
         List<CategoryEntity> chrilrden = list
                 .stream()
-                .filter(ca -> ca.getParentCid() == entity.getCatId())
+                .filter(ca -> ca.getParentCid() .equals(entity.getCatId()))
                 .map(li -> getChilrden(li, list))
                 .sorted(Comparator.comparingInt(menu -> (menu.getSort() == null ? 0 : menu.getSort()))
                 )
