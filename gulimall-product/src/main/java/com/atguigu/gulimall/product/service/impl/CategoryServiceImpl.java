@@ -47,6 +47,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return list1;
     }
 
+    @Override
+    public void removeByMenus(List<Long> longs) {
+        //这里做逻辑操作
+        baseMapper.deleteBatchIds(longs);
+    }
+
     //递归查找所有菜单的子菜单
     public CategoryEntity getChilrden(CategoryEntity entity, List<CategoryEntity> list) {
         List<CategoryEntity> chrilrden = list
