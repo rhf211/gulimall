@@ -3,9 +3,7 @@ package com.atguigu.gulimall.product.service.impl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -53,11 +51,28 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         baseMapper.deleteBatchIds(longs);
     }
 
+    @Override
+    public Long[] findCatelogPath(Long catelogId) {
+
+        List<Long> paths = new ArrayList<>();
+        findParentPath(catelogId, paths);
+        Collections.reverse(paths);
+        return paths.toArray(new Long[paths.size()]);
+    }
+
+    private void findParentPath(Long catelogId, List<Long> paths) {
+        paths.add(catelogId);
+        CategoryEntity categoryEntity = this.getById(catelogId);
+        if (categoryEntity.getParentCid() != 0) {
+            findParentPath(categoryEntity.getParentCid(), paths);
+        }
+    }
+
     //递归查找所有菜单的子菜单
     public CategoryEntity getChilrden(CategoryEntity entity, List<CategoryEntity> list) {
         List<CategoryEntity> chrilrden = list
                 .stream()
-                .filter(ca -> ca.getParentCid() .equals(entity.getCatId()))
+                .filter(ca -> ca.getParentCid().equals(entity.getCatId()))
                 .map(li -> getChilrden(li, list))
                 .sorted(Comparator.comparingInt(menu -> (menu.getSort() == null ? 0 : menu.getSort()))
                 )
