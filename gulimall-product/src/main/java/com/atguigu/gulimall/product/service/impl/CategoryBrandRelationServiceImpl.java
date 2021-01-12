@@ -4,6 +4,7 @@ import com.atguigu.gulimall.product.dao.BrandDao;
 import com.atguigu.gulimall.product.dao.CategoryDao;
 import com.atguigu.gulimall.product.entity.BrandEntity;
 import com.atguigu.gulimall.product.service.BrandService;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ import com.atguigu.gulimall.product.entity.CategoryBrandRelationEntity;
 import com.atguigu.gulimall.product.service.CategoryBrandRelationService;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotEmpty;
 
 
 @Service("categoryBrandRelationService")
@@ -59,6 +61,19 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
             return byId;
         }).collect(Collectors.toList());
         return collect;
+    }
+
+    @Override
+    public void updateBrand(Long brandId, @NotEmpty(message = "品牌名必须填写") String name) {
+        CategoryBrandRelationEntity relationEntity = new CategoryBrandRelationEntity();
+        relationEntity.setBrandId(brandId);
+        relationEntity.setBrandName(name);
+        this.update(relationEntity,new UpdateWrapper<CategoryBrandRelationEntity>().eq("brand_id",brandId));
+    }
+
+    @Override
+    public void updateCategory(Long catId, String name) {
+        this.baseMapper.updateCategory(catId,name);
     }
 
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.atguigu.common.utils.PageUtils;
 import com.atguigu.gulimall.product.entity.CategoryBrandRelationEntity;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Map;
 
@@ -20,5 +21,9 @@ public interface CategoryBrandRelationService extends IService<CategoryBrandRela
     PageUtils queryPage(Map<String, Object> params);
 
     List<BrandEntity> getBrandsByCatId(Long catId);
+
+    void updateBrand(Long brandId, @NotEmpty(message = "品牌名必须填写") String name);
+
+    void updateCategory(Long catId, String name);
 }
 
