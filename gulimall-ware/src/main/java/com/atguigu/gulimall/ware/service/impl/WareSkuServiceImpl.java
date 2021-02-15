@@ -1,6 +1,7 @@
 package com.atguigu.gulimall.ware.service.impl;
 
 import com.atguigu.common.utils.R;
+import com.atguigu.gulimall.ware.feign.ProductFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +18,17 @@ import com.atguigu.gulimall.ware.entity.WareSkuEntity;
 import com.atguigu.gulimall.ware.service.WareSkuService;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
+
 
 @Service("wareSkuService")
 public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> implements WareSkuService {
 
-    /*@Autowired
+    @Resource
     WareSkuDao wareSkuDao;
 
-    @Autowired
-    ProductFeignService productFeignService;*/
+    @Resource
+    ProductFeignService productFeignService;
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         /**
@@ -54,7 +57,7 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
 
     @Override
     public void addStock(Long skuId, Long wareId, Integer skuNum) {
-      /*  //1、判断如果还没有这个库存记录新增
+        //1、判断如果还没有这个库存记录新增
         List<WareSkuEntity> entities = wareSkuDao.selectList(new QueryWrapper<WareSkuEntity>().eq("sku_id", skuId).eq("ware_id", wareId));
         if(entities == null || entities.size() == 0){
             WareSkuEntity skuEntity = new WareSkuEntity();
@@ -80,7 +83,7 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
             wareSkuDao.insert(skuEntity);
         }else{
             wareSkuDao.addStock(skuId,wareId,skuNum);
-        }*/
+        }
     }
 
 
