@@ -7,7 +7,7 @@
 #  cloud:
 #    nacos:
 #      discovery:
-#        server-addr: 119.3.142.255:8848
+#        server-addr: 49.235.66.54:8848
 #  application:
 #    name: gulimall-coupon
 #
